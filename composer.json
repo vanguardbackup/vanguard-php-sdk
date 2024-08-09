@@ -1,0 +1,54 @@
+{
+    "name": "vanguardbackup/vanguard-php-sdk",
+    "description": "The official VanguardBackup PHP SDK.",
+    "keywords": ["vanguard", "backup", "sdk", "php"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/vanguardbackup/vanguard-php-sdk/issues",
+        "source": "https://github.com/vanguardbackup/vanguard-php-sdk"
+    },
+    "authors": [
+        {
+            "name": "Lewis Larsen",
+            "email": "lewis@larsens.dev"
+        }
+    ],
+    "require": {
+        "php": "^7.2|^8.0",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.3.1|^7.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+        ,
+        "illuminate/support": "^7.0|^8.0|^9.0|^10.0|^11.0",
+        "mockery/mockery": "^1.3.1",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^8.4|^9.0|^10.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "VanguardBackup\\Vanguard\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "VanguardBackup\\Vanguard\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "VanguardBackup\\Vanguard\\VanguardServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
