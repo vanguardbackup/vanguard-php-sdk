@@ -1,6 +1,6 @@
 {
     "name": "vanguardbackup/vanguard-php-sdk",
-    "description": "The official VanguardBackup PHP SDK.",
+    "description": "The official Vanguard PHP SDK.",
     "keywords": ["vanguard", "backup", "sdk", "php"],
     "license": "MIT",
     "support": {
@@ -14,17 +14,16 @@
         }
     ],
     "require": {
-        "php": "^7.2|^8.0",
+        "php": "^7.2|^8.0|^8.1|^8.2|^8.3|^8.4",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^6.3.1|^7.0"
+        "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest"
-        ,
+        "roave/security-advisories": "dev-latest",
         "illuminate/support": "^7.0|^8.0|^9.0|^10.0|^11.0",
         "mockery/mockery": "^1.3.1",
         "phpstan/phpstan": "^1.10",
-        "phpunit/phpunit": "^8.4|^9.0|^10.4"
+        "phpunit/phpunit": "^8.5|^9.0|^10.0"
     },
     "autoload": {
         "psr-4": {
@@ -38,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.x-dev"
+            "dev-main": "0.x-dev"
         },
         "laravel": {
             "providers": [

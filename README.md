@@ -1,14 +1,14 @@
-# VanguardBackup PHP SDK
+# Vanguard PHP SDK
 
 ## Overview
 
-The VanguardBackup PHP SDK offers a fluent interface for interacting with the VanguardBackup API, enabling efficient management of your backup operations.
+The Vanguard PHP SDK offers a fluent interface for interacting with Vanguard's API, enabling efficient management of your backup operations.
 
 ## API Documentation
 
-While this SDK provides a convenient way to interact with the VanguardBackup API, you may sometimes need more detailed information about the specific parameters and responses for each endpoint. For comprehensive API documentation, including request/response schemas and example payloads, please refer to our official API documentation:
+While this SDK provides a convenient way to interact with Vanguard's API, you may sometimes need more detailed information about the specific parameters and responses for each endpoint. For comprehensive API documentation, including request/response schemas and example payloads, please refer to our official API documentation:
 
-[VanguardBackup API Documentation](https://docs.vanguardbackup.com/api/introduction)
+[Vanguard API Documentation](https://docs.vanguardbackup.com/api/introduction)
 
 This resource will be invaluable when constructing requests or handling responses, especially for more complex operations not fully abstracted by the SDK.
 
@@ -16,7 +16,7 @@ This resource will be invaluable when constructing requests or handling response
 
 ### Installation
 
-Add the VanguardBackup SDK to your project using Composer:
+Add the Vanguard PHP SDK to your project using Composer:
 
 ```bash
 composer require vanguardbackup/vanguard-sdk
@@ -30,7 +30,7 @@ Create a new instance of the VanguardBackup client:
 $vanguard = new VanguardBackup\Vanguard\VanguardClient('YOUR_API_KEY');
 ```
 
-For custom VanguardBackup installations, specify the API base URL:
+For custom Vanguard installations, specify the API base URL:
 
 ```php
 $vanguard = new VanguardBackup\Vanguard\VanguardClient('YOUR_API_KEY', 'https://your-vanguard-instance.com/api');
@@ -48,7 +48,7 @@ $user = $vanguard->user();
 
 ### Backup Task Management
 
-Backup tasks are central to VanguardBackup operations. Here's how to interact with them:
+Backup tasks are central to Vanguard's operations. Here's how to interact with them:
 
 ```php
 // List all backup tasks
