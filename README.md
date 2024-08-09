@@ -19,7 +19,7 @@ This resource will be invaluable when constructing requests or handling response
 Add the Vanguard PHP SDK to your project using Composer:
 
 ```bash
-composer require vanguardbackup/vanguard-sdk
+composer require vanguardbackup/vanguard-php-sdk
 ```
 
 ### Initializing the SDK
