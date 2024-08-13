@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Actions;
 
 use VanguardBackup\Vanguard\Resources\BackupDestination;
@@ -20,9 +22,6 @@ trait ManagesBackupDestinations
 
     /**
      * Get a backup destination instance.
-     *
-     * @param string $destinationId
-     * @return BackupDestination
      */
     public function backupDestination(string $destinationId): BackupDestination
     {
@@ -31,9 +30,6 @@ trait ManagesBackupDestinations
 
     /**
      * Create a new backup destination.
-     *
-     * @param array $data
-     * @return BackupDestination
      */
     public function createBackupDestination(array $data): BackupDestination
     {
@@ -42,10 +38,6 @@ trait ManagesBackupDestinations
 
     /**
      * Update the given backup destination.
-     *
-     * @param string $destinationId
-     * @param array $data
-     * @return BackupDestination
      */
     public function updateBackupDestination(string $destinationId, array $data): BackupDestination
     {
@@ -54,9 +46,6 @@ trait ManagesBackupDestinations
 
     /**
      * Delete the given backup destination.
-     *
-     * @param string $destinationId
-     * @return void
      */
     public function deleteBackupDestination(string $destinationId): void
     {

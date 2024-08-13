@@ -2,15 +2,15 @@
 
 ## Overview
 
-The Vanguard PHP SDK offers a fluent interface for interacting with Vanguard's API, enabling efficient management of your backup operations.
+The Vanguard PHP SDK provides a fluent interface for interacting with Vanguard's API, enabling efficient management of your backup operations.
 
 ## API Documentation
 
-While this SDK provides a convenient way to interact with Vanguard's API, you may sometimes need more detailed information about the specific parameters and responses for each endpoint. For comprehensive API documentation, including request/response schemas and example payloads, please refer to our official API documentation:
+For comprehensive API documentation, including request/response schemas and example payloads, please refer to our official API documentation:
 
 [Vanguard API Documentation](https://docs.vanguardbackup.com/api/introduction)
 
-This resource will be invaluable when constructing requests or handling responses, especially for more complex operations not fully abstracted by the SDK.
+This resource is invaluable when constructing requests or handling responses, especially for complex operations not fully abstracted by the SDK.
 
 ## Getting Started
 
@@ -48,7 +48,7 @@ $user = $vanguard->user();
 
 ### Backup Task Management
 
-Backup tasks are central to Vanguard's operations. Here's how to interact with them:
+Manage your backup tasks:
 
 ```php
 // List all backup tasks
@@ -91,6 +91,29 @@ $task->delete();
 $task->getStatus();
 $task->getLatestLog();
 $task->run();
+```
+
+### Backup Task Log Management
+
+Manage logs for your backup tasks:
+
+```php
+// List all backup task logs
+$logs = $vanguard->backupTaskLogs();
+
+// Get a specific backup task log
+$log = $vanguard->backupTaskLog($logId);
+
+// Delete a backup task log
+$vanguard->deleteBackupTaskLog($logId);
+```
+
+Individual `BackupTaskLog` instances also provide methods for common operations:
+
+```php
+$log->delete();
+$log->isSuccessful();
+$log->isFailed();
 ```
 
 ### Remote Server Management

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Resources;
 
 class RemoteServer extends Resource
@@ -56,7 +58,6 @@ class RemoteServer extends Resource
     /**
      * Update the given remote server.
      *
-     * @param array $data
      * @return \VanguardBackup\Vanguard\Resources\RemoteServer
      */
     public function update(array $data)
@@ -76,8 +77,6 @@ class RemoteServer extends Resource
 
     /**
      * Get the IP address of the remote server.
-     *
-     * @return string
      */
     public function getIpAddress(): string
     {
@@ -86,8 +85,6 @@ class RemoteServer extends Resource
 
     /**
      * Get the username for the remote server connection.
-     *
-     * @return string
      */
     public function getUsername(): string
     {
@@ -96,8 +93,6 @@ class RemoteServer extends Resource
 
     /**
      * Get the port for the remote server connection.
-     *
-     * @return int
      */
     public function getPort(): int
     {
@@ -106,8 +101,6 @@ class RemoteServer extends Resource
 
     /**
      * Check if a database password is set for the remote server.
-     *
-     * @return bool
      */
     public function isDatabasePasswordSet(): bool
     {
@@ -116,8 +109,6 @@ class RemoteServer extends Resource
 
     /**
      * Get the connectivity status of the remote server.
-     *
-     * @return string
      */
     public function getConnectivityStatus(): string
     {
@@ -126,8 +117,6 @@ class RemoteServer extends Resource
 
     /**
      * Get the last connected timestamp of the remote server.
-     *
-     * @return string|null
      */
     public function getLastConnectedAt(): ?string
     {
@@ -136,8 +125,6 @@ class RemoteServer extends Resource
 
     /**
      * Check if the remote server is currently connected.
-     *
-     * @return bool
      */
     public function isConnected(): bool
     {

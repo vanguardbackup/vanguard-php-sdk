@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Actions;
 
 use VanguardBackup\Vanguard\Resources\Tag;
@@ -20,9 +22,6 @@ trait ManagesTags
 
     /**
      * Get a tag instance.
-     *
-     * @param string $tagId
-     * @return Tag
      */
     public function tag(string $tagId): Tag
     {
@@ -31,9 +30,6 @@ trait ManagesTags
 
     /**
      * Create a new tag.
-     *
-     * @param array $data
-     * @return Tag
      */
     public function createTag(array $data): Tag
     {
@@ -42,10 +38,6 @@ trait ManagesTags
 
     /**
      * Update the given tag.
-     *
-     * @param string $tagId
-     * @param array $data
-     * @return Tag
      */
     public function updateTag(string $tagId, array $data): Tag
     {
@@ -54,9 +46,6 @@ trait ManagesTags
 
     /**
      * Delete the given tag.
-     *
-     * @param string $tagId
-     * @return void
      */
     public function deleteTag(string $tagId): void
     {

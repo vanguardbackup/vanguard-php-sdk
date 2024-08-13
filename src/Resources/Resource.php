@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Resources;
 
 use VanguardBackup\Vanguard\VanguardClient;
@@ -9,23 +11,17 @@ class Resource
 {
     /**
      * The resource attributes.
-     *
-     * @var array
      */
     protected array $attributes;
 
     /**
      * The VanguardBackup client instance.
-     *
-     * @var VanguardClient|null
      */
     protected ?VanguardClient $client;
 
     /**
      * Create a new resource instance.
      *
-     * @param array $attributes
-     * @param VanguardClient|null $client
      * @return void
      */
     public function __construct(array $attributes, ?VanguardClient $client = null)
@@ -38,8 +34,6 @@ class Resource
 
     /**
      * Fill the resource with the array of attributes.
-     *
-     * @return void
      */
     protected function fill(): void
     {
@@ -52,9 +46,6 @@ class Resource
 
     /**
      * Convert the key name to camel case.
-     *
-     * @param string $key
-     * @return string
      */
     protected function camelCase(string $key): string
     {
@@ -63,11 +54,6 @@ class Resource
 
     /**
      * Transform the items of the collection to the given class.
-     *
-     * @param array $collection
-     * @param string $class
-     * @param array $extraData
-     * @return array
      */
     protected function transformCollection(array $collection, string $class, array $extraData = []): array
     {
@@ -78,10 +64,6 @@ class Resource
 
     /**
      * Transform the collection of tags to a string.
-     *
-     * @param array $tags
-     * @param string $separator
-     * @return string
      */
     protected function transformTags(array $tags, string $separator = ', '): string
     {
@@ -90,9 +72,6 @@ class Resource
 
     /**
      * Get an attribute from the resource.
-     *
-     * @param string $key
-     * @return mixed
      */
     public function getAttribute(string $key): mixed
     {
@@ -101,8 +80,6 @@ class Resource
 
     /**
      * Get all attributes from the resource.
-     *
-     * @return array
      */
     public function getAttributes(): array
     {

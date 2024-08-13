@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Actions;
 
 use VanguardBackup\Vanguard\Resources\BackupTask;
@@ -20,9 +22,6 @@ trait ManagesBackupTasks
 
     /**
      * Get a backup task instance.
-     *
-     * @param string $taskId
-     * @return BackupTask
      */
     public function backupTask(string $taskId): BackupTask
     {
@@ -31,9 +30,6 @@ trait ManagesBackupTasks
 
     /**
      * Create a new backup task.
-     *
-     * @param array $data
-     * @return BackupTask
      */
     public function createBackupTask(array $data): BackupTask
     {
@@ -42,10 +38,6 @@ trait ManagesBackupTasks
 
     /**
      * Update the given backup task.
-     *
-     * @param string $taskId
-     * @param array $data
-     * @return BackupTask
      */
     public function updateBackupTask(string $taskId, array $data): BackupTask
     {
@@ -54,9 +46,6 @@ trait ManagesBackupTasks
 
     /**
      * Delete the given backup task.
-     *
-     * @param string $taskId
-     * @return void
      */
     public function deleteBackupTask(string $taskId): void
     {
@@ -65,9 +54,6 @@ trait ManagesBackupTasks
 
     /**
      * Get the status of a backup task.
-     *
-     * @param string $taskId
-     * @return array
      */
     public function getBackupTaskStatus(string $taskId): array
     {
@@ -76,9 +62,6 @@ trait ManagesBackupTasks
 
     /**
      * Get the latest log for a backup task.
-     *
-     * @param string $taskId
-     * @return array
      */
     public function getLatestBackupTaskLog(string $taskId): array
     {
@@ -87,9 +70,6 @@ trait ManagesBackupTasks
 
     /**
      * Run a backup task.
-     *
-     * @param string $taskId
-     * @return array
      */
     public function runBackupTask(string $taskId): array
     {

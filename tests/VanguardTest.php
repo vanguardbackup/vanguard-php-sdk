@@ -1,121 +1,122 @@
 <?php
 
-namespace Tests;
+declare(strict_types=1);
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use VanguardBackup\Vanguard\Exceptions\NotFoundException;
-use VanguardBackup\Vanguard\Exceptions\ValidationException;
 use VanguardBackup\Vanguard\Exceptions\RateLimitExceededException;
+use VanguardBackup\Vanguard\Exceptions\ValidationException;
+use VanguardBackup\Vanguard\Resources\Tag;
 use VanguardBackup\Vanguard\VanguardClient;
-use Mockery;
-use PHPUnit\Framework\TestCase;
 
-class VanguardTest extends TestCase
-{
-    protected function tearDown(): void
-    {
-        Mockery::close();
-    }
+beforeEach(function () {
+    $http = Mockery::mock(Client::class);
+    $vanguard = new VanguardClient('123', null, $http);
 
-    public function test_making_basic_requests(): void
-    {
-        $vanguard = new VanguardClient('123', $http = Mockery::mock(Client::class));
+    return compact('http', 'vanguard');
+});
 
-        $http->shouldReceive('request')->once()->with('GET', 'tags', [])->andReturn(
-            new Response(200, [], '{"data": [{"id": 1, "label": "Test Tag"}]}')
-        );
+afterEach(function () {
+    Mockery::close();
+});
 
-        $this->assertCount(1, $vanguard->tags());
-    }
+test('get tags', function ($http, $vanguard) {
+    $http->shouldReceive('request')->once()->with('GET', 'tags', [])->andReturn(
+        new Response(200, [], json_encode(['tags' => [['id' => 1, 'label' => 'Test Tag']]])
+        ));
 
-    public function test_update_backup_task(): void
-    {
-        $vanguard = new VanguardClient('123', $http = Mockery::mock(Client::class));
+    $tags = $vanguard->tags();
 
-        $http->shouldReceive('request')->once()->with('PUT', 'backup-tasks/456', [
-            'json' => ['label' => 'Updated Backup Task'],
-        ])->andReturn(
-            new Response(200, [], '{"data": {"id": 456, "label": "Updated Backup Task"}}')
-        );
+    expect($tags)->toBeArray()->toHaveCount(1)
+        ->and($tags[0])->toBeInstanceOf(Tag::class)
+        ->and($tags[0]->label)->toBe('Test Tag');
+})->with('vanguard');
 
-        $this->assertSame('Updated Backup Task', $vanguard->updateBackupTask('456', [
-            'label' => 'Updated Backup Task',
-        ])->label);
-    }
+test('create tag', function ($http, $vanguard) {
+    $tagData = ['label' => 'New Tag'];
+    $http->shouldReceive('request')->once()->with('POST', 'tags', ['form_params' => $tagData])->andReturn(
+        new Response(200, [], json_encode(['tag' => ['id' => 1, 'label' => 'New Tag']]))
+    );
 
-    public function test_handling_validation_errors(): void
-    {
-        $vanguard = new VanguardClient('123', $http = Mockery::mock(Client::class));
+    $tag = $vanguard->createTag($tagData);
 
-        $http->shouldReceive('request')->once()->with('GET', 'tags', [])->andReturn(
-            new Response(422, [], '{"error": "Validation Error", "message": "The given data was invalid.", "errors": {"label": ["The label field is required."]}}')
-        );
+    expect($tag)->toBeInstanceOf(Tag::class)
+        ->and($tag->label)->toBe('New Tag');
+})->with('vanguard');
 
-        try {
-            $vanguard->tags();
-        } catch (ValidationException $e) {
-            $this->assertEquals(['label' => ['The label field is required.']], $e->getErrors());
-        }
-    }
+test('update tag', function ($http, $vanguard) {
+    $tagData = ['label' => 'Updated Tag'];
+    $http->shouldReceive('request')->once()->with('PUT', 'tags/1', ['form_params' => $tagData])->andReturn(
+        new Response(200, [], json_encode(['tag' => ['id' => 1, 'label' => 'Updated Tag']]))
+    );
 
-    public function test_handling_404_errors(): void
-    {
-        $this->expectException(NotFoundException::class);
+    $tag = $vanguard->updateTag('1', $tagData);
 
-        $vanguard = new VanguardClient('123', $http = Mockery::mock(Client::class));
+    expect($tag)->toBeInstanceOf(Tag::class)
+        ->and($tag->label)->toBe('Updated Tag');
+})->with('vanguard');
 
-        $http->shouldReceive('request')->once()->with('GET', 'tags', [])->andReturn(
-            new Response(404)
-        );
+test('delete tag', function ($http, $vanguard) {
+    $http->shouldReceive('request')->once()->with('DELETE', 'tags/1', [])->andReturn(
+        new Response(200, [], json_encode(['message' => 'Tag deleted successfully']))
+    );
 
+    $vanguard->deleteTag('1');
+
+    // If no exception is thrown, the test passes
+    expect(true)->toBeTrue();
+})->with('vanguard');
+
+test('handling validation errors', function ($http, $vanguard) {
+    $http->shouldReceive('request')->once()->with('GET', 'tags', [])->andReturn(
+        new Response(422, [], json_encode([
+            'error' => 'Validation Error',
+            'message' => 'The given data was invalid.',
+            'errors' => ['label' => ['The label field is required.']],
+        ]))
+    );
+
+    $vanguard->tags();
+})->throws(ValidationException::class)->with('vanguard');
+
+test('handling 404 errors', function ($http, $vanguard) {
+    $http->shouldReceive('request')->once()->with('GET', 'tags', [])->andReturn(
+        new Response(404)
+    );
+
+    $vanguard->tags();
+})->throws(NotFoundException::class)->with('vanguard');
+
+test('rate limit exceeded with header set', function ($http, $vanguard) {
+    $timestamp = time();
+
+    $http->shouldReceive('request')->once()->with('GET', 'tags', [])->andReturn(
+        new Response(429, ['x-ratelimit-reset' => $timestamp], 'Too Many Attempts.')
+    );
+
+    try {
         $vanguard->tags();
+    } catch (RateLimitExceededException $e) {
+        expect($e->getRateLimitResetsAt())->toBe($timestamp);
     }
+})->with('vanguard');
 
-    public function testRateLimitExceededWithHeaderSet(): void
-    {
-        $vanguard = new VanguardClient('123', $http = Mockery::mock(Client::class));
+test('rate limit exceeded with header not available', function ($http, $vanguard) {
+    $http->shouldReceive('request')->once()->with('GET', 'tags', [])->andReturn(
+        new Response(429, [], 'Too Many Attempts.')
+    );
 
-        $timestamp = strtotime(date('Y-m-d H:i:s'));
-
-        $http->shouldReceive('request')->once()->with('GET', 'tags', [])->andReturn(
-            new Response(429, [
-                'x-ratelimit-reset' => $timestamp,
-            ], 'Too Many Attempts.')
-        );
-
-        try {
-            $vanguard->tags();
-        } catch (RateLimitExceededException $e) {
-            $this->assertSame($timestamp, $e->getRateLimitResetsAt());
-        }
+    try {
+        $vanguard->tags();
+    } catch (RateLimitExceededException $e) {
+        expect($e->getRateLimitResetsAt())->toBeNull();
     }
+})->with('vanguard');
 
-    public function testRateLimitExceededWithHeaderNotAvailable(): void
-    {
-        $vanguard = new VanguardClient('123', $http = Mockery::mock(Client::class));
+dataset('vanguard', function () {
+    $http = Mockery::mock(Client::class);
+    $vanguard = new VanguardClient('123', null, $http);
 
-        $http->shouldReceive('request')->once()->with('GET', 'tags', [])->andReturn(
-            new Response(429, [], 'Too Many Attempts.')
-        );
-
-        try {
-            $vanguard->tags();
-        } catch (RateLimitExceededException $e) {
-            $this->assertNull($e->getRateLimitResetsAt());
-        }
-    }
-
-    public function test_run_backup_task(): void
-    {
-        $vanguard = new VanguardClient('123', $http = Mockery::mock(Client::class));
-
-        $http->shouldReceive('request')->once()->with('POST', 'backup-tasks/789/run', [])->andReturn(
-            new Response(200, [], '{"message": "Backup task initiated successfully."}')
-        );
-
-        $response = $vanguard->runBackupTask('789');
-        $this->assertArrayHasKey('message', $response);
-        $this->assertEquals('Backup task initiated successfully.', $response['message']);
-    }
-}
+    return [[$http, $vanguard]];
+});

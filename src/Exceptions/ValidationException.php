@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Exceptions;
 
 use Exception;
@@ -8,16 +10,11 @@ class ValidationException extends Exception
 {
     /**
      * The array of validation errors.
-     *
-     * @var array
      */
     protected array $errors;
 
     /**
      * Create a new exception instance.
-     *
-     * @param array $errors
-     * @param string $message
      */
     public function __construct(array $errors, string $message = 'The given data failed to pass validation.')
     {
@@ -28,8 +25,6 @@ class ValidationException extends Exception
 
     /**
      * Get the validation errors.
-     *
-     * @return array
      */
     public function getErrors(): array
     {

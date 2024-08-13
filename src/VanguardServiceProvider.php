@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard;
 
 use Illuminate\Contracts\Foundation\Application;

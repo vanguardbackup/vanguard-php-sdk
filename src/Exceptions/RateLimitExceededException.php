@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Exceptions;
 
 use Exception;
@@ -8,16 +10,11 @@ class RateLimitExceededException extends Exception
 {
     /**
      * The timestamp when the rate limit will be reset.
-     *
-     * @var int|null
      */
     public ?int $rateLimitResetsAt;
 
     /**
      * Create a new exception instance.
-     *
-     * @param int|null $rateLimitReset
-     * @param string $message
      */
     public function __construct(?int $rateLimitReset, string $message = 'API rate limit exceeded.')
     {
@@ -28,8 +25,6 @@ class RateLimitExceededException extends Exception
 
     /**
      * Get the timestamp when the rate limit will be reset.
-     *
-     * @return int|null
      */
     public function getRateLimitResetsAt(): ?int
     {

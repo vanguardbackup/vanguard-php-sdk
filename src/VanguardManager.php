@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard;
 
 use GuzzleHttp\Client as HttpClient;
@@ -14,17 +16,11 @@ class VanguardManager
 
     /**
      * The VanguardClient instance.
-     *
-     * @var VanguardClient
      */
     protected VanguardClient $client;
 
     /**
      * Create a new VanguardBackup manager instance.
-     *
-     * @param string $apiKey
-     * @param string|null $baseUrl
-     * @param HttpClient|null $httpClient
      */
     public function __construct(string $apiKey, ?string $baseUrl = null, ?HttpClient $httpClient = null)
     {
@@ -34,8 +30,6 @@ class VanguardManager
     /**
      * Dynamically forward method calls to the VanguardClient instance.
      *
-     * @param string $method
-     * @param array $parameters
      * @return mixed
      */
     public function __call(string $method, array $parameters)
@@ -45,8 +39,6 @@ class VanguardManager
 
     /**
      * Get the underlying VanguardClient instance.
-     *
-     * @return VanguardClient
      */
     public function getClient(): VanguardClient
     {
@@ -56,7 +48,6 @@ class VanguardManager
     /**
      * Set the base URL for the VanguardBackup API.
      *
-     * @param string $url
      * @return $this
      */
     public function setBaseUrl(string $url): self
@@ -68,8 +59,6 @@ class VanguardManager
 
     /**
      * Get the base URL for the VanguardBackup API.
-     *
-     * @return string
      */
     public function getBaseUrl(): string
     {

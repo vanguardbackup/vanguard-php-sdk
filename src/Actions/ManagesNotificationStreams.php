@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Actions;
 
 use VanguardBackup\Vanguard\Resources\NotificationStream;
@@ -20,9 +22,6 @@ trait ManagesNotificationStreams
 
     /**
      * Get a notification stream instance.
-     *
-     * @param string $streamId
-     * @return NotificationStream
      */
     public function notificationStream(string $streamId): NotificationStream
     {
@@ -31,9 +30,6 @@ trait ManagesNotificationStreams
 
     /**
      * Create a new notification stream.
-     *
-     * @param array $data
-     * @return NotificationStream
      */
     public function createNotificationStream(array $data): NotificationStream
     {
@@ -42,10 +38,6 @@ trait ManagesNotificationStreams
 
     /**
      * Update the given notification stream.
-     *
-     * @param string $streamId
-     * @param array $data
-     * @return NotificationStream
      */
     public function updateNotificationStream(string $streamId, array $data): NotificationStream
     {
@@ -54,9 +46,6 @@ trait ManagesNotificationStreams
 
     /**
      * Delete the given notification stream.
-     *
-     * @param string $streamId
-     * @return void
      */
     public function deleteNotificationStream(string $streamId): void
     {

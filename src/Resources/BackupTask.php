@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Resources;
 
 class BackupTask extends Resource
@@ -98,7 +100,6 @@ class BackupTask extends Resource
     /**
      * Update the given backup task.
      *
-     * @param array $data
      * @return \VanguardBackup\Vanguard\Resources\BackupTask
      */
     public function update(array $data)
@@ -118,8 +119,6 @@ class BackupTask extends Resource
 
     /**
      * Get the status of the backup task.
-     *
-     * @return array
      */
     public function getStatus(): array
     {
@@ -128,8 +127,6 @@ class BackupTask extends Resource
 
     /**
      * Get the latest log for the backup task.
-     *
-     * @return array
      */
     public function getLatestLog(): array
     {
@@ -138,8 +135,6 @@ class BackupTask extends Resource
 
     /**
      * Run the backup task.
-     *
-     * @return array
      */
     public function run(): array
     {
@@ -148,8 +143,6 @@ class BackupTask extends Resource
 
     /**
      * Check if the backup task is for a database.
-     *
-     * @return bool
      */
     public function isDatabaseBackup(): bool
     {
@@ -158,8 +151,6 @@ class BackupTask extends Resource
 
     /**
      * Check if the backup task is for files.
-     *
-     * @return bool
      */
     public function isFileBackup(): bool
     {
@@ -168,8 +159,6 @@ class BackupTask extends Resource
 
     /**
      * Get the frequency of the backup task.
-     *
-     * @return string
      */
     public function getFrequency(): string
     {
@@ -178,8 +167,6 @@ class BackupTask extends Resource
 
     /**
      * Get the time the backup task is scheduled to run.
-     *
-     * @return string
      */
     public function getScheduledTime(): string
     {

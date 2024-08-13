@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Actions;
 
 use VanguardBackup\Vanguard\Resources\RemoteServer;
@@ -20,9 +22,6 @@ trait ManagesRemoteServers
 
     /**
      * Get a remote server instance.
-     *
-     * @param string $serverId
-     * @return RemoteServer
      */
     public function remoteServer(string $serverId): RemoteServer
     {
@@ -31,9 +30,6 @@ trait ManagesRemoteServers
 
     /**
      * Create a new remote server.
-     *
-     * @param array $data
-     * @return RemoteServer
      */
     public function createRemoteServer(array $data): RemoteServer
     {
@@ -42,10 +38,6 @@ trait ManagesRemoteServers
 
     /**
      * Update the given remote server.
-     *
-     * @param string $serverId
-     * @param array $data
-     * @return RemoteServer
      */
     public function updateRemoteServer(string $serverId, array $data): RemoteServer
     {
@@ -54,9 +46,6 @@ trait ManagesRemoteServers
 
     /**
      * Delete the given remote server.
-     *
-     * @param string $serverId
-     * @return void
      */
     public function deleteRemoteServer(string $serverId): void
     {

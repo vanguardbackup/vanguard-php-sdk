@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Resources;
 
 class BackupDestination extends Resource
@@ -77,7 +79,6 @@ class BackupDestination extends Resource
     /**
      * Update the given backup destination.
      *
-     * @param array $data
      * @return \VanguardBackup\Vanguard\Resources\BackupDestination
      */
     public function update(array $data)
@@ -97,8 +98,6 @@ class BackupDestination extends Resource
 
     /**
      * Check if the backup destination is of type S3.
-     *
-     * @return bool
      */
     public function isS3(): bool
     {
@@ -107,8 +106,6 @@ class BackupDestination extends Resource
 
     /**
      * Check if the backup destination is of type custom S3.
-     *
-     * @return bool
      */
     public function isCustomS3(): bool
     {
@@ -117,8 +114,6 @@ class BackupDestination extends Resource
 
     /**
      * Get the S3 endpoint URL.
-     *
-     * @return string|null
      */
     public function getS3EndpointUrl(): ?string
     {

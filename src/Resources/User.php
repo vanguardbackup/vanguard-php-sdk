@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard\Resources;
 
 use VanguardBackup\Vanguard\VanguardClient;
@@ -149,8 +151,7 @@ class User extends Resource
     /**
      * Create a new User instance.
      *
-     * @param array $attributes
-     * @param VanguardClient|null $vanguard
+     * @param  VanguardClient|null  $vanguard
      * @return void
      */
     public function __construct(array $attributes, $vanguard = null)

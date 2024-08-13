@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VanguardBackup\Vanguard;
 
 use GuzzleHttp\Client as HttpClient;
+use VanguardBackup\Vanguard\Actions\ManagesBackupTaskLogs;
 use VanguardBackup\Vanguard\Resources\User;
 
 class VanguardClient
@@ -12,26 +15,21 @@ class VanguardClient
         Actions\ManagesNotificationStreams,
         Actions\ManagesRemoteServers,
         Actions\ManagesTags,
+        ManagesBackupTaskLogs,
         MakesHttpRequests;
 
     /**
      * The VanguardBackup API Key.
-     *
-     * @var string
      */
     protected string $apiKey;
 
     /**
      * The Guzzle HTTP Client instance.
-     *
-     * @var \GuzzleHttp\Client
      */
     public HttpClient $httpClient;
 
     /**
      * The base URL for the VanguardBackup API.
-     *
-     * @var string
      */
     protected string $baseUrl = 'https://app.vanguardbackup.com/api/';
 
@@ -40,7 +38,6 @@ class VanguardClient
      *
      * @param  string|null  $apiKey
      * @param  string|null  $baseUrl
-     * @param  \GuzzleHttp\Client|null  $httpClient
      * @return void
      */
     public function __construct($apiKey = null, $baseUrl = null, ?HttpClient $httpClient = null)
@@ -100,7 +97,6 @@ class VanguardClient
     /**
      * Set the base URL for the VanguardBackup API.
      *
-     * @param string $url
      * @return $this
      */
     public function setBaseUrl(string $url): static
@@ -112,8 +108,6 @@ class VanguardClient
 
     /**
      * Get the base URL for the VanguardBackup API.
-     *
-     * @return string
      */
     public function getBaseUrl(): string
     {
@@ -122,8 +116,6 @@ class VanguardClient
 
     /**
      * Get an authenticated user instance.
-     *
-     * @return User
      */
     public function user(): User
     {
