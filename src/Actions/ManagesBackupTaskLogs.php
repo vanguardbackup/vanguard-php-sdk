@@ -11,7 +11,6 @@ trait ManagesBackupTaskLogs
     /**
      * Get the collection of backup task logs.
      *
-     * @param array $query
      * @return BackupTaskLog[]
      */
     public function backupTaskLogs(array $query = []): array

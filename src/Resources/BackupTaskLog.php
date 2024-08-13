@@ -50,8 +50,6 @@ class BackupTaskLog extends Resource
 
     /**
      * Delete the given backup task log.
-     *
-     * @return void
      */
     public function delete(): void
     {
@@ -60,8 +58,6 @@ class BackupTaskLog extends Resource
 
     /**
      * Check if the backup task was successful.
-     *
-     * @return bool
      */
     public function isSuccessful(): bool
     {
@@ -70,8 +66,6 @@ class BackupTaskLog extends Resource
 
     /**
      * Check if the backup task failed.
-     *
-     * @return bool
      */
     public function isFailed(): bool
     {

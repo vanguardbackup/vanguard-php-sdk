@@ -15,8 +15,8 @@ class VanguardClient
         Actions\ManagesNotificationStreams,
         Actions\ManagesRemoteServers,
         Actions\ManagesTags,
-        ManagesBackupTaskLogs,
-        MakesHttpRequests;
+        MakesHttpRequests,
+        ManagesBackupTaskLogs;
 
     /**
      * The VanguardBackup API Key.
