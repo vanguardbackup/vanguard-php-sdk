@@ -5,11 +5,16 @@
     <img src="https://img.shields.io/github/license/vanguardbackup/vanguard-php-sdk?style=for-the-badge&logo=opensourceinitiative&logoColor=ffffff" alt="License: MIT">
   </a>
   <a href="https://github.com/vanguardbackup/vanguard-php-sdk/actions/workflows/tests.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/vanguardbackup/vanguard-php-sdk/tests.yml?style=for-the-badge&logo=githubactions&logoColor=ffffff&label=CI%20Pipeline" alt="Tests">
+    <img src="https://img.shields.io/github/actions/workflow/status/vanguardbackup/vanguard-php-sdk/tests.yml?style=for-the-badge&logo=githubactions&logoColor=ffffff&label=Tests" alt="Tests">
   </a>
 <a href="https://github.com/vanguardbackup/vanguard-php-sdk/releases">
   <img src="https://img.shields.io/github/v/release/vanguardbackup/vanguard-php-sdk?style=for-the-badge&logo=github&logoColor=ffffff" alt="GitHub Release">
 </a>
+<a href="https://packagist.org/packages/vanguardbackup/vanguard-php-sdk">
+<img alt="Packagist Downloads" src="https://img.shields.io/packagist/dt/vanguardbackup/vanguard-php-sdk?style=for-the-badge&logo=packagist&logoColor=ffffff&logoSize=auto&label=Downloads">
+</a>
+
+
 </p>
 
 # Vanguard PHP SDK
