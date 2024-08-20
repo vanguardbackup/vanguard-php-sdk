@@ -12,7 +12,7 @@ class VanguardServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
-    public function register()
+    public function register(): void
     {
         $this->app->singleton(VanguardManager::class, function ($app) {
             return new VanguardManager($app['config']->get('services.vanguard.token'));

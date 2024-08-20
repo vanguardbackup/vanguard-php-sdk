@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VanguardBackup\Vanguard\Actions;
 
+use Exception;
 use VanguardBackup\Vanguard\Resources\BackupDestination;
 
 trait ManagesBackupDestinations
@@ -12,8 +13,9 @@ trait ManagesBackupDestinations
      * Get the collection of backup destinations.
      *
      * @return BackupDestination[]
+     * @throws Exception
      */
-    public function backupDestinations()
+    public function backupDestinations(): array
     {
         return $this->transformCollection(
             $this->get('backup-destinations')['data'], BackupDestination::class

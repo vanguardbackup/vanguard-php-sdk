@@ -36,11 +36,11 @@ class VanguardClient
     /**
      * Create a new VanguardClient instance.
      *
-     * @param  string|null  $apiKey
-     * @param  string|null  $baseUrl
+     * @param string|null $apiKey
+     * @param string|null $baseUrl
      * @return void
      */
-    public function __construct($apiKey = null, $baseUrl = null, ?HttpClient $httpClient = null)
+    public function __construct(string $apiKey = null, string $baseUrl = null, ?HttpClient $httpClient = null)
     {
         if (! is_null($baseUrl)) {
             $this->setBaseUrl($baseUrl);
@@ -58,12 +58,12 @@ class VanguardClient
     /**
      * Transform the items of the collection to the given class.
      *
-     * @param  array  $collection
-     * @param  string  $class
-     * @param  array  $extraData
+     * @param array $collection
+     * @param string $class
+     * @param array $extraData
      * @return array
      */
-    protected function transformCollection($collection, $class, $extraData = [])
+    protected function transformCollection(array $collection, string $class, array $extraData = []): array
     {
         return array_map(function ($data) use ($class, $extraData) {
             return new $class($data + $extraData, $this);
@@ -73,11 +73,11 @@ class VanguardClient
     /**
      * Set the API key and set up the HTTP client.
      *
-     * @param  string  $apiKey
-     * @param  \GuzzleHttp\Client|null  $httpClient
+     * @param string $apiKey
+     * @param HttpClient|null $httpClient
      * @return $this
      */
-    public function setApiKey($apiKey, $httpClient = null): static
+    public function setApiKey(string $apiKey, HttpClient $httpClient = null): static
     {
         $this->apiKey = $apiKey;
 

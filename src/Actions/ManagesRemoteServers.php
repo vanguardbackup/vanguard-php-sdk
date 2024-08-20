@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VanguardBackup\Vanguard\Actions;
 
+use Exception;
 use VanguardBackup\Vanguard\Resources\RemoteServer;
 
 trait ManagesRemoteServers
@@ -12,8 +13,9 @@ trait ManagesRemoteServers
      * Get the collection of remote servers.
      *
      * @return RemoteServer[]
+     * @throws Exception
      */
-    public function remoteServers()
+    public function remoteServers(): array
     {
         return $this->transformCollection(
             $this->get('remote-servers')['data'], RemoteServer::class

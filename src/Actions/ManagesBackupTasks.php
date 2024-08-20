@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VanguardBackup\Vanguard\Actions;
 
+use Exception;
 use VanguardBackup\Vanguard\Resources\BackupTask;
 
 trait ManagesBackupTasks
@@ -12,8 +13,9 @@ trait ManagesBackupTasks
      * Get the collection of backup tasks.
      *
      * @return BackupTask[]
+     * @throws Exception
      */
-    public function backupTasks()
+    public function backupTasks(): array
     {
         return $this->transformCollection(
             $this->get('backup-tasks')['data'], BackupTask::class

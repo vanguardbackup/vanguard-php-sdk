@@ -5,7 +5,7 @@ declare(strict_types=1);
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use VanguardBackup\Vanguard\Exceptions\NotFoundException;
-use VanguardBackup\Vanguard\Exceptions\RateLimitExceededException;
+use VanguardBackup\Vanguard\Exceptions\TooManyRequestsException;
 use VanguardBackup\Vanguard\Exceptions\ValidationException;
 use VanguardBackup\Vanguard\Resources\Tag;
 use VanguardBackup\Vanguard\VanguardClient;
@@ -97,7 +97,7 @@ test('rate limit exceeded with header set', function ($http, $vanguard) {
 
     try {
         $vanguard->tags();
-    } catch (RateLimitExceededException $e) {
+    } catch (TooManyRequestsException $e) {
         expect($e->getRateLimitResetsAt())->toBe($timestamp);
     }
 })->with('vanguard');
@@ -109,7 +109,7 @@ test('rate limit exceeded with header not available', function ($http, $vanguard
 
     try {
         $vanguard->tags();
-    } catch (RateLimitExceededException $e) {
+    } catch (TooManyRequestsException $e) {
         expect($e->getRateLimitResetsAt())->toBeNull();
     }
 })->with('vanguard');

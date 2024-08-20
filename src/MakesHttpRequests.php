@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace VanguardBackup\Vanguard;
 
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
+use VanguardBackup\Vanguard\Exceptions\MaintenanceException;
 use VanguardBackup\Vanguard\Exceptions\NotFoundException;
-use VanguardBackup\Vanguard\Exceptions\RateLimitExceededException;
+use VanguardBackup\Vanguard\Exceptions\TooManyRequestsException;
 use VanguardBackup\Vanguard\Exceptions\ValidationException;
 
 trait MakesHttpRequests
@@ -16,11 +18,12 @@ trait MakesHttpRequests
     /**
      * Send a GET request to VanguardBackup API and return the response.
      *
-     * @param  string  $uri
+     * @param string $uri
      *
-     * @throws Exception
+     * @return mixed
+     * @throws GuzzleException
      */
-    public function get($uri): mixed
+    public function get(string $uri): mixed
     {
         return $this->request('GET', $uri);
     }
@@ -28,11 +31,12 @@ trait MakesHttpRequests
     /**
      * Send a POST request to VanguardBackup API and return the response.
      *
-     * @param  string  $uri
-     *
-     * @throws Exception
+     * @param string $uri
+     * @param array $payload
+     * @return mixed
+     * @throws GuzzleException
      */
-    public function post($uri, array $payload = []): mixed
+    public function post(string $uri, array $payload = []): mixed
     {
         return $this->request('POST', $uri, $payload);
     }
@@ -40,11 +44,12 @@ trait MakesHttpRequests
     /**
      * Send a PUT request to VanguardBackup API and return the response.
      *
-     * @param  string  $uri
-     *
-     * @throws Exception
+     * @param string $uri
+     * @param array $payload
+     * @return mixed
+     * @throws GuzzleException
      */
-    public function put($uri, array $payload = []): mixed
+    public function put(string $uri, array $payload = []): mixed
     {
         return $this->request('PUT', $uri, $payload);
     }
@@ -54,7 +59,7 @@ trait MakesHttpRequests
      *
      * @param  string  $uri
      *
-     * @throws Exception
+     * @throws Exception|GuzzleException
      */
     public function delete($uri, array $payload = []): mixed
     {
@@ -64,12 +69,13 @@ trait MakesHttpRequests
     /**
      * Send a request to VanguardBackup API and return the response.
      *
-     * @param  string  $method
-     * @param  string  $uri
-     *
-     * @throws Exception
+     * @param string $method
+     * @param string $uri
+     * @param array $payload
+     * @return mixed
+     * @throws GuzzleException
      */
-    protected function request($method, $uri, array $payload = []): mixed
+    protected function request(string $method, string $uri, array $payload = []): mixed
     {
         $options = $this->prepareRequestPayload($payload);
 
@@ -113,7 +119,7 @@ trait MakesHttpRequests
      *
      * @throws NotFoundException
      * @throws ValidationException
-     * @throws RateLimitExceededException
+     * @throws TooManyRequestsException
      * @throws Exception
      */
     protected function handleRequestError(ResponseInterface $response): void
@@ -124,11 +130,12 @@ trait MakesHttpRequests
         throw match ($statusCode) {
             422 => new ValidationException(json_decode($body, true, 512, JSON_THROW_ON_ERROR)),
             404 => new NotFoundException,
-            429 => new RateLimitExceededException(
+            429 => new TooManyRequestsException(
                 $response->hasHeader('x-ratelimit-reset')
                     ? (int) $response->getHeader('x-ratelimit-reset')[0]
                     : null
             ),
+            503 => new MaintenanceException,
             default => new RuntimeException($body),
         };
     }

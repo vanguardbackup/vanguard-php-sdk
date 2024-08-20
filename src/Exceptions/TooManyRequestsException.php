@@ -6,7 +6,7 @@ namespace VanguardBackup\Vanguard\Exceptions;
 
 use Exception;
 
-class RateLimitExceededException extends Exception
+class TooManyRequestsException extends Exception
 {
     /**
      * The timestamp when the rate limit will be reset.

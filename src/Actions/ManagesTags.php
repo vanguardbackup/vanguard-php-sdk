@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VanguardBackup\Vanguard\Actions;
 
+use Exception;
 use VanguardBackup\Vanguard\Resources\Tag;
 
 trait ManagesTags
@@ -12,8 +13,9 @@ trait ManagesTags
      * Get the collection of tags.
      *
      * @return Tag[]
+     * @throws Exception
      */
-    public function tags()
+    public function tags(): array
     {
         return $this->transformCollection(
             $this->get('tags')['tags'], Tag::class

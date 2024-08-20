@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VanguardBackup\Vanguard\Actions;
 
+use Exception;
 use VanguardBackup\Vanguard\Resources\NotificationStream;
 
 trait ManagesNotificationStreams
@@ -12,8 +13,9 @@ trait ManagesNotificationStreams
      * Get the collection of notification streams.
      *
      * @return NotificationStream[]
+     * @throws Exception
      */
-    public function notificationStreams()
+    public function notificationStreams(): array
     {
         return $this->transformCollection(
             $this->get('notification-streams')['data'], NotificationStream::class
