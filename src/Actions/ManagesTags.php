@@ -13,6 +13,7 @@ trait ManagesTags
      * Get the collection of tags.
      *
      * @return Tag[]
+     *
      * @throws Exception
      */
     public function tags(): array

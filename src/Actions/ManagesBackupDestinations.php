@@ -13,6 +13,7 @@ trait ManagesBackupDestinations
      * Get the collection of backup destinations.
      *
      * @return BackupDestination[]
+     *
      * @throws Exception
      */
     public function backupDestinations(): array

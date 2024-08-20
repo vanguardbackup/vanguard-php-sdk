@@ -13,6 +13,7 @@ trait ManagesNotificationStreams
      * Get the collection of notification streams.
      *
      * @return NotificationStream[]
+     *
      * @throws Exception
      */
     public function notificationStreams(): array

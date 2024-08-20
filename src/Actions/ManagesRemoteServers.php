@@ -13,6 +13,7 @@ trait ManagesRemoteServers
      * Get the collection of remote servers.
      *
      * @return RemoteServer[]
+     *
      * @throws Exception
      */
     public function remoteServers(): array

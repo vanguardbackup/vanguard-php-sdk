@@ -13,6 +13,7 @@ trait ManagesBackupTasks
      * Get the collection of backup tasks.
      *
      * @return BackupTask[]
+     *
      * @throws Exception
      */
     public function backupTasks(): array

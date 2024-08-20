@@ -18,9 +18,7 @@ trait MakesHttpRequests
     /**
      * Send a GET request to VanguardBackup API and return the response.
      *
-     * @param string $uri
      *
-     * @return mixed
      * @throws GuzzleException
      */
     public function get(string $uri): mixed
@@ -31,9 +29,6 @@ trait MakesHttpRequests
     /**
      * Send a POST request to VanguardBackup API and return the response.
      *
-     * @param string $uri
-     * @param array $payload
-     * @return mixed
      * @throws GuzzleException
      */
     public function post(string $uri, array $payload = []): mixed
@@ -44,9 +39,6 @@ trait MakesHttpRequests
     /**
      * Send a PUT request to VanguardBackup API and return the response.
      *
-     * @param string $uri
-     * @param array $payload
-     * @return mixed
      * @throws GuzzleException
      */
     public function put(string $uri, array $payload = []): mixed
@@ -69,10 +61,6 @@ trait MakesHttpRequests
     /**
      * Send a request to VanguardBackup API and return the response.
      *
-     * @param string $method
-     * @param string $uri
-     * @param array $payload
-     * @return mixed
      * @throws GuzzleException
      */
     protected function request(string $method, string $uri, array $payload = []): mixed

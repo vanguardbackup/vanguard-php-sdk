@@ -36,11 +36,9 @@ class VanguardClient
     /**
      * Create a new VanguardClient instance.
      *
-     * @param string|null $apiKey
-     * @param string|null $baseUrl
      * @return void
      */
-    public function __construct(string $apiKey = null, string $baseUrl = null, ?HttpClient $httpClient = null)
+    public function __construct(?string $apiKey = null, ?string $baseUrl = null, ?HttpClient $httpClient = null)
     {
         if (! is_null($baseUrl)) {
             $this->setBaseUrl($baseUrl);
@@ -57,11 +55,6 @@ class VanguardClient
 
     /**
      * Transform the items of the collection to the given class.
-     *
-     * @param array $collection
-     * @param string $class
-     * @param array $extraData
-     * @return array
      */
     protected function transformCollection(array $collection, string $class, array $extraData = []): array
     {
@@ -73,11 +66,9 @@ class VanguardClient
     /**
      * Set the API key and set up the HTTP client.
      *
-     * @param string $apiKey
-     * @param HttpClient|null $httpClient
      * @return $this
      */
-    public function setApiKey(string $apiKey, HttpClient $httpClient = null): static
+    public function setApiKey(string $apiKey, ?HttpClient $httpClient = null): static
     {
         $this->apiKey = $apiKey;
 
