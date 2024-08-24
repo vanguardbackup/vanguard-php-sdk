@@ -49,11 +49,9 @@ trait MakesHttpRequests
     /**
      * Send a DELETE request to VanguardBackup API and return the response.
      *
-     * @param  string  $uri
-     *
-     * @throws Exception|GuzzleException
+     * @throws GuzzleException
      */
-    public function delete($uri, array $payload = []): mixed
+    public function delete(string $uri, array $payload = []): mixed
     {
         return $this->request('DELETE', $uri, $payload);
     }

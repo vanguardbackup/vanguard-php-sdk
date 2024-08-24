@@ -31,24 +31,22 @@ class VanguardClient
     /**
      * The base URL for the VanguardBackup API.
      */
-    protected string $baseUrl = 'https://app.vanguardbackup.com/api/';
+    protected string $baseUrl = 'https://app.vanguardbackup.com';
 
     /**
      * Create a new VanguardClient instance.
-     *
-     * @return void
      */
     public function __construct(?string $apiKey = null, ?string $baseUrl = null, ?HttpClient $httpClient = null)
     {
-        if (! is_null($baseUrl)) {
+        if ($baseUrl !== null) {
             $this->setBaseUrl($baseUrl);
         }
 
-        if (! is_null($apiKey)) {
+        if ($apiKey !== null) {
             $this->setApiKey($apiKey, $httpClient);
         }
 
-        if (! is_null($httpClient)) {
+        if ($httpClient !== null) {
             $this->httpClient = $httpClient;
         }
     }
@@ -65,18 +63,16 @@ class VanguardClient
 
     /**
      * Set the API key and set up the HTTP client.
-     *
-     * @return $this
      */
     public function setApiKey(string $apiKey, ?HttpClient $httpClient = null): static
     {
         $this->apiKey = $apiKey;
 
-        $this->httpClient = $httpClient ?: new HttpClient([
-            'base_uri' => $this->baseUrl,
+        $this->httpClient = $httpClient ?? new HttpClient([
+            'base_uri' => $this->getApiUrl(),
             'http_errors' => false,
             'headers' => [
-                'Authorization' => 'Bearer '.$this->apiKey,
+                'Authorization' => "Bearer {$this->apiKey}",
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ],
@@ -87,8 +83,6 @@ class VanguardClient
 
     /**
      * Set the base URL for the VanguardBackup API.
-     *
-     * @return $this
      */
     public function setBaseUrl(string $url): static
     {
@@ -103,6 +97,14 @@ class VanguardClient
     public function getBaseUrl(): string
     {
         return $this->baseUrl;
+    }
+
+    /**
+     * Get the full API URL, including the '/api/' path.
+     */
+    public function getApiUrl(): string
+    {
+        return "{$this->baseUrl}/api";
     }
 
     /**
