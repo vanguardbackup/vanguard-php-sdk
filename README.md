@@ -52,7 +52,7 @@ $vanguard = new VanguardBackup\Vanguard\VanguardClient('YOUR_API_KEY');
 For custom Vanguard installations, specify the API base URL:
 
 ```php
-$vanguard = new VanguardBackup\Vanguard\VanguardClient('YOUR_API_KEY', 'https://your-vanguard-instance.com/api');
+$vanguard = new VanguardBackup\Vanguard\VanguardClient('YOUR_API_KEY', 'https://your-vanguard-instance.com');
 ```
 
 ## Core Functionalities
