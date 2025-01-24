@@ -31,7 +31,7 @@ class VanguardClient
     /**
      * The base URL for the VanguardBackup API.
      */
-    protected string $baseUrl = 'https://app.vanguardbackup.com';
+    protected string $baseUrl = 'https://app.vanguardbackup.com/';
 
     /**
      * Create a new VanguardClient instance.
@@ -86,7 +86,7 @@ class VanguardClient
      */
     public function setBaseUrl(string $url): static
     {
-        $this->baseUrl = rtrim($url, '/');
+        $this->baseUrl = rtrim($url, '/').'/';
 
         return $this;
     }
@@ -104,7 +104,7 @@ class VanguardClient
      */
     public function getApiUrl(): string
     {
-        return "{$this->baseUrl}/api";
+        return "{$this->baseUrl}api/";
     }
 
     /**

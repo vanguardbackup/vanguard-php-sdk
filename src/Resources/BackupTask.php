@@ -77,13 +77,6 @@ class BackupTask extends Resource
     public $status;
 
     /**
-     * Whether the backup task has isolated credentials.
-     *
-     * @var bool
-     */
-    public $hasIsolatedCredentials;
-
-    /**
      * The date/time the backup task was created.
      *
      * @var string
