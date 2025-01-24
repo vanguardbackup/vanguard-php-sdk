@@ -72,13 +72,6 @@ class User extends Resource
     public mixed $isAdmin;
 
     /**
-     * Determines if GitHub login is enabled for the user.
-     *
-     * @var bool
-     */
-    public mixed $githubLoginEnabled;
-
-    /**
      * Determines if weekly summary is enabled for the user.
      *
      * @var bool
@@ -167,7 +160,6 @@ class User extends Resource
         $this->timezone = $attributes['account_settings']['timezone'];
         $this->language = $attributes['account_settings']['language'];
         $this->isAdmin = $attributes['account_settings']['is_admin'];
-        $this->githubLoginEnabled = $attributes['account_settings']['github_login_enabled'];
         $this->weeklySummaryEnabled = $attributes['account_settings']['weekly_summary_enabled'];
         $this->totalBackupTasks = $attributes['backup_tasks']['total'];
         $this->activeBackupTasks = $attributes['backup_tasks']['active'];
