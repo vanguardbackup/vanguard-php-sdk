@@ -236,6 +236,21 @@ $updatedStream = $vanguard->updateNotificationStream($streamId, [
 $vanguard->deleteNotificationStream($streamId);
 ```
 
+### SSH Key Management
+
+Retrieve the Vanguard instance SSH public key:
+
+```php
+// Get the instance SSH public key
+$sshKey = $vanguard->getInstanceSshKey();
+
+// Access the public key as a string
+echo $sshKey->publicKey;
+
+// Or cast the object to a string to get the public key
+echo (string) $sshKey;
+```
+
 ## Security
 
 For reporting security vulnerabilities, please refer to our [security policy](https://github.com/vanguardbackup/vanguard/security/policy).

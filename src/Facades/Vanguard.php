@@ -6,6 +6,7 @@ namespace VanguardBackup\Vanguard\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use VanguardBackup\Vanguard\Resources\ScheduledBackupTask;
+use VanguardBackup\Vanguard\Resources\SshKey;
 use VanguardBackup\Vanguard\VanguardManager;
 
 /**
@@ -13,6 +14,7 @@ use VanguardBackup\Vanguard\VanguardManager;
  * @method static \VanguardBackup\Vanguard\VanguardClient setBaseUrl(string $url)
  * @method static string getBaseUrl()
  * @method static \VanguardBackup\Vanguard\Resources\User user()
+ * @method static SshKey getInstanceSshKey()
  * @method static \VanguardBackup\Vanguard\Resources\Tag[] tags()
  * @method static \VanguardBackup\Vanguard\Resources\Tag tag(string $tagId)
  * @method static \VanguardBackup\Vanguard\Resources\Tag createTag(array $data)

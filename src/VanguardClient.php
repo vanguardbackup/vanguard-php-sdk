@@ -14,6 +14,7 @@ class VanguardClient
         Actions\ManagesBackupTasks,
         Actions\ManagesNotificationStreams,
         Actions\ManagesRemoteServers,
+        Actions\ManagesSshKeys,
         Actions\ManagesTags,
         MakesHttpRequests,
         ManagesBackupTaskLogs;
