@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace VanguardBackup\Vanguard\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use VanguardBackup\Vanguard\Resources\ScheduledBackupTask;
 use VanguardBackup\Vanguard\VanguardManager;
 
 /**
@@ -40,6 +41,7 @@ use VanguardBackup\Vanguard\VanguardManager;
  * @method static array getBackupTaskStatus(string $taskId)
  * @method static array getLatestBackupTaskLog(string $taskId)
  * @method static array runBackupTask(string $taskId)
+ * @method static ScheduledBackupTask[] upcomingBackupTasks()
  * @method static mixed get(string $uri)
  * @method static mixed post(string $uri, array $payload = [])
  * @method static mixed put(string $uri, array $payload = [])

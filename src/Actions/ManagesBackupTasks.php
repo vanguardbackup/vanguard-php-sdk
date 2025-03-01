@@ -6,6 +6,7 @@ namespace VanguardBackup\Vanguard\Actions;
 
 use Exception;
 use VanguardBackup\Vanguard\Resources\BackupTask;
+use VanguardBackup\Vanguard\Resources\ScheduledBackupTask;
 
 trait ManagesBackupTasks
 {
@@ -77,5 +78,15 @@ trait ManagesBackupTasks
     public function runBackupTask(string $taskId): array
     {
         return $this->post("backup-tasks/{$taskId}/run");
+    }
+
+    /**
+     * Get upcoming scheduled backup tasks.
+     */
+    public function upcomingBackupTasks(): array
+    {
+        return $this->transformCollection(
+            $this->get('backup-tasks/upcoming')['data'], ScheduledBackupTask::class
+        );
     }
 }
